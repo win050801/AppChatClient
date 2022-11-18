@@ -6,10 +6,10 @@ import { AppContext } from "../../context/AppProvider";
 import axios from "axios";
 import { addTT } from "../../utils/APIRoutes";
 import { async } from "@firebase/util";
-export default function AddUserModal() {
+export default function AddFriendModal() {
   const {
-    isAddUserModalOpen,
-    setIsAddUserModalOpen,
+    isAddFriendModalOpen,
+    setIsAddFriendModalOpen,
     contacts,
     roomChat,
     setRoomChat,
@@ -46,12 +46,12 @@ export default function AddUserModal() {
     });
     setdata([]);
     setMembers([]);
-    setIsAddUserModalOpen(false);
+    setIsAddFriendModalOpen(false);
   };
 
   const handleCancel = () => {
     // console.log(roomChat);
-    setIsAddUserModalOpen(false);
+    setIsAddFriendModalOpen(false);
   };
   const addMembers = (user) => {
     const mems = [...members];
@@ -76,16 +76,16 @@ export default function AddUserModal() {
     });
     // console.log(data1);
     setdata(data1);
-  }, [isAddUserModalOpen]);
+  }, [isAddFriendModalOpen]);
 
   return (
     <div>
       <Modal
-        title="Thêm thành viên"
-        open={isAddUserModalOpen}
+        title="Thêm bạn"
+        open={isAddFriendModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Xác nhận"
+        okText="Tìm kiếm"
         cancelText="Hủy"
       >
         <form>
@@ -103,7 +103,7 @@ export default function AddUserModal() {
               }}
             ></ReactPhoneInput>
           </div>
-          <span>Tất cả</span>
+          <span>Có thể bạn quen</span>
           <br></br>
           {/* <List
             className="md-add-user-list"
@@ -126,7 +126,15 @@ export default function AddUserModal() {
 
                   <div style={{ display: "flex", flex: 0.8 }}>
                     <div style={{ paddingTop: 7 }}>
-                      <Avatar src={user.avatarImage}></Avatar>
+                      {user.avatarImage ? (
+                        <Avatar size={60} src={user.avatarImage}></Avatar>
+                      ) : (
+                        <Avatar size={60}>
+                          <span style={{ fontSize: "34px" }}>
+                            {user.username?.charAt(0)?.toUpperCase()}
+                          </span>
+                        </Avatar>
+                      )}
                     </div>
                     <p></p>
                     <p className="thep">{user.username}</p>

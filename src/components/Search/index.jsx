@@ -10,7 +10,7 @@ import { AppContext } from "../../context/AppProvider";
 
 export default function Search() {
   const {
-    setIsAddUserModalOpen,
+    setIsAddFriendModalOpen,
     setIsAddGroupModalOpen,
     isSearchInput,
     setIsSearchInput,
@@ -25,7 +25,7 @@ export default function Search() {
   };
 
   const handleAddUser = () => {
-    setIsAddUserModalOpen(true);
+    setIsAddFriendModalOpen(true);
   };
 
   const handleAddGroup = () => {

@@ -10,6 +10,7 @@ export default function AppProvider({ children }) {
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [isAddGroupModalOpen, setIsAddGroupModalOpen] = useState(false);
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
+  const [isAddFriendModalOpen, setIsAddFriendModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isLogoutChatRoomModalOpen, setIsLogoutChatRoomModalOpen] =
     useState(false);
@@ -63,6 +64,8 @@ export default function AppProvider({ children }) {
         setIsAddGroupModalOpen,
         isAddMemberModalOpen,
         setIsAddMemberModalOpen,
+        isAddFriendModalOpen,
+        setIsAddFriendModalOpen,
         isLogoutModalOpen,
         setIsLogoutModalOpen,
         isLogoutChatRoomModalOpen,

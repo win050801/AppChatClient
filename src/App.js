@@ -14,6 +14,7 @@ import LogoutChatRoomModal from "./components/Modals/LogoutChatRoomModal";
 import LogoutModal from "./components/Modals/LogoutModal";
 import RenameGroupModal from "./components/Modals/RenameGroupModal";
 import DeleteGroupModal from "./components/Modals/DeleteGroupModal";
+import AddFriendModal from "./components/Modals/AddFriendModal";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <UpdateInfoUserModal />
         <AddUserModal />
         <AddGroupModal />
+        <AddFriendModal />
         <DeleteChatHistoryModal />
         <DeleteGroupModal />
         <LogoutChatRoomModal />

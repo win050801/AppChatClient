@@ -13,7 +13,7 @@ export default function PhoneBookList({ contacts, changeChat }) {
     setShowInfoRoom,
     isFriendWindow,
     setIsFriendWindow,
-    setIsAddUserModalOpen,
+    setIsAddFriendModalOpen,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function PhoneBookList({ contacts, changeChat }) {
   };
 
   const handleAddFriend = () => {
-    setIsAddUserModalOpen(true);
+    setIsAddFriendModalOpen(true);
   };
 
   return (
