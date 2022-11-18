@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Input, Row, Tabs } from "antd";
 import { LockOutlined, MobileOutlined } from "@ant-design/icons";
 import ReactPhoneInput from "react-phone-input-2";
@@ -9,22 +9,23 @@ import "./style.css";
 import AuthOtp from "../AuthOtp";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import {loginRoute} from "../../utils/APIRoutes"
+import { loginRoute } from "../../utils/APIRoutes";
+
 export default function Login() {
   const [checkOtp, setCheckOtp] = useState(true);
   const navigate = useNavigate();
-  const [phonenumber,setphone] = useState("")
-  const[password,setpass]= useState("")
-  const [vlphone,setvlphone] = useState("")
-  const [vlpass,setvlpass] = useState("")
-  const [er,seter] = useState("")
+  const [phonenumber, setphone] = useState("");
+  const [password, setpass] = useState("");
+  const [vlphone, setvlphone] = useState("");
+  const [vlpass, setvlpass] = useState("");
+  const [er, seter] = useState("");
+
   const handleAuthOtp = () => {
     setCheckOtp(!checkOtp);
   };
 
   const handleLogin = async () => {
-   if (validateForm()) {
+    if (validateForm()) {
       try {
         const { data } = await axios.post(loginRoute, {
           phonenumber,
@@ -32,42 +33,32 @@ export default function Login() {
         });
         if (data.status === false) {
           seter(data.msg);
-        }
-        
-        else if (data.status === true) {
+        } else if (data.status === true) {
           // console.log(process.env.REACT_APP_LOCALHOST_KEY);
           localStorage.setItem(
             process.env.REACT_APP_LOCALHOST_KEY,
             JSON.stringify(data.user)
           );
-        
           navigate("/");
-          
         }
       } catch (error) {
-
         seter("Không thể kết nối đến server");
       }
-      
-      
     }
-    
-   
   };
-  
+
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
   }, []);
   const validateForm = () => {
-    
     if (phonenumber === "") {
       seter("SDT is required.");
       return false;
     } else if (password === "") {
       seter("Password is required.");
-    
+
       return false;
     }
     return true;
@@ -130,7 +121,11 @@ export default function Login() {
                           }}
                         ></ReactPhoneInput>
                       </div>
-                      <span style={{color: "red",paddingLeft:50,fontSize:15}} >{vlphone}</span>
+                      <span
+                        style={{ color: "red", paddingLeft: 50, fontSize: 15 }}
+                      >
+                        {vlphone}
+                      </span>
                       <br></br>
                       <div className="login-password-input">
                         <Input.Password
@@ -141,7 +136,11 @@ export default function Login() {
                           prefix={<LockOutlined />}
                         />
                       </div>
-                      <span style={{color: "red",paddingLeft:50,fontSize:15}} >{vlpass}</span>
+                      <span
+                        style={{ color: "red", paddingLeft: 50, fontSize: 15 }}
+                      >
+                        {vlpass}
+                      </span>
                       <Button className="login-btn-login" onClick={handleLogin}>
                         Đăng nhập với mật khẩu
                       </Button>
@@ -155,7 +154,15 @@ export default function Login() {
                       <Link className="login-link" to="/repassword">
                         Quên mật khẩu?
                       </Link>
-                      <span  style={{color: "red",textAlign:"center",fontSize:16}}>{er}</span>
+                      <span
+                        style={{
+                          color: "red",
+                          textAlign: "center",
+                          fontSize: 16,
+                        }}
+                      >
+                        {er}
+                      </span>
                     </form>
                   ),
                 },
@@ -173,8 +180,6 @@ export default function Login() {
           </span>
         </Col>
       </Row>
-      
-      
     </div>
   );
 }

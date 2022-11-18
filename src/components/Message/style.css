@@ -1,54 +1,46 @@
 .message-author {
-    font-weight: bold;
-    font-style: italic;
-    color: #686868;
+  font-weight: bold;
+  font-style: italic;
+  color: #686868;
 }
 .content {
-    background-color: #ffffff;
-    border-radius: 8px;
-    margin: 0 8px;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 26em;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin: 0 8px;
+  padding: 10px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+.text-mess {
+  font-size: 18px;
+  font-weight: 500;
+  word-wrap: break-word;
+  width: 100%;
 }
 .message-date {
-    font-size: 10px;
-    color: #a7a7a7;
+  font-size: 10px;
+  color: #a7a7a7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.content {
-    background-color: #ffffff;
-    border-radius: 8px;
-    margin: 0 8px;
-    padding: 10px;
+.message-date Button {
+  border-radius: 100%;
 }
 .msg {
-    margin-bottom: 10px;
-    display: flex;
-    font-weight: bold;
-    /* max-width: 300px; */
+  margin: 4px 0 4px 4px;
+  display: flex;
+  font-weight: bold;
 }
 
 .m-msg .content {
-    background-color: #c9eaed;
+  background-color: #e5efff;
 }
 .m-msg {
-    margin-right: 8px;
-    margin-bottom: 10px;
-    display: flex;
-    font-weight: bold;
-    flex-direction: row-reverse;
-    /* max-width: 300px; */
-}
-.btn {
-    border-width: 0ch;
-}
-.reaction {
-    /* background-color: red; */
-    position: relative;
-    top: -10px;
-    left: 50px;
-}
-.text-mess{
-    font-size: 15px;
-    font-weight: bold;
-    word-wrap:break-word;
-    /* max-width: 300px; */
+  margin: 4px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row-reverse;
 }

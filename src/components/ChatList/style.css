@@ -1,6 +1,6 @@
 .chatlist {
   background-color: #fefefe;
-  height: 92vh;
+  height: 90vh;
   overflow: auto;
 }
 .tabs {
@@ -10,22 +10,22 @@
   background-color: #eeeff2;
 }
 
-.contact{
+.contact {
   display: flex;
   background-color: white;
   width: "90%";
 }
-.contact:hover{
+.contact:hover {
   background-color: #eeeff2;
 }
-.avt{
+.avt {
   display: flex;
   flex: 0.2;
   justify-content: center;
   align-items: center;
- padding-top: 20px;
+  padding-top: 20px;
 }
-.name{
+.name {
   display: flex;
   flex: 0.8;
   padding-top: 20px;

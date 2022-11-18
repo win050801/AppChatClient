@@ -1,19 +1,29 @@
 .chat-header-btn {
   height: 100%;
-  min-width: 100px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-right: 1.5em;
 }
 .btn-chat-header {
-  border-radius: 4px;
-  margin: 0 0.2em;
-  border: none;
+  height: 2.7rem;
+  width: 2.7rem;
+  border-radius: 6px;
+  margin: 0 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-chat-header:hover {
   background-color: #eeeff2;
 }
 .btn-chat-header:focus {
-  background-color: #eeeff2;
+  background-color: #e5efff;
+  color: #0068ff;
+}
+.btn-chat-header span {
+  font-size: 1.3rem;
+}
+.btn-sidebar svg {
+  font-size: 1.2rem;
 }

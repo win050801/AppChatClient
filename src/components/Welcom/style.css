@@ -1,29 +1,28 @@
-h1{
-    color: red;
+h1 {
+  color: red;
 }
-.container{
-    display: flex;
-    flex: 1;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    border-left: solid gray 0.001cm;
+.container {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #e0e1e3;
 }
-.form{
-    width: 80vh;
-    height: 70vh;
-    flex-direction: column;
-   
+.form {
+  width: 80vh;
+  height: 70vh;
+  flex-direction: column;
 }
-.header{
-    display: flex;
-    flex: 0.2;
-    justify-content: center;
-    align-items: center;
+.header {
+  display: flex;
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
 }
-.bd{
-    display: flex;
-    flex: 0.8;
-    justify-content: center;
-    align-items: center;
+.bd {
+  display: flex;
+  flex: 0.8;
+  justify-content: center;
+  align-items: center;
 }

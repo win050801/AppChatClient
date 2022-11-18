@@ -1,67 +1,68 @@
 .chat-view-message {
-    height: 84vh;
-    max-height: 100%;
-    background-color: #eeeff2;
-    overflow-y: auto;
-    /* overflow-x: hidden; */
+  height: 82vh;
+  max-height: 100%;
+  background-color: #f4f5f7;
+  overflow-y: auto;
 }
 .m-msg {
-    float: right;
-    clear: both;
-    max-width: 500px;
+  float: right;
+  clear: both;
+
+  /* max-width: 500px;
+  background-color: #0068ff; */
 }
 .msg {
-    float: left;
-    clear: both;
-    max-width: 500px;
+  float: left;
+  clear: both;
+  /* max-width: 500px; */
 }
 
 .menu-msg-m {
-    display: flex;
-    width: fit-content;
-    border-radius: 8px;
-    right: 8rem;
-    bottom: 5rem;
+  display: flex;
+  width: fit-content;
+  border-radius: 8px;
+  right: 7.4rem;
+  bottom: 4rem;
 }
 
 .menu-msg-m li:hover {
-    background-color: white;
+  background-color: white;
 }
 .menu-msg-m Button {
-    height: fit-content;
-    margin: -0.5rem;
+  height: fit-content;
+  margin: -0.5rem;
 }
 .menu-msg-m Button:hover {
-    background-color: white;
+  background-color: white;
 }
 
 .menu-msg {
-    display: flex;
-    width: fit-content;
-    border-radius: 8px;
-    left: 100%;
-    bottom: 5rem;
+  display: flex;
+  width: fit-content;
+  border-radius: 8px;
+  left: 100%;
+  bottom: 4rem;
 }
 
 .menu-msg li:hover {
-    background-color: white;
+  background-color: white;
 }
 .menu-msg Button {
-    height: fit-content;
-    margin: -0.5rem;
+  height: fit-content;
+  margin: -0.5rem;
 }
 .menu-msg Button:hover {
-    background-color: white;
+  background-color: white;
 }
 
 .menu-msg-icon {
-    color: #65707b;
-    font-size: 1rem;
+  color: #65707b;
+  font-size: 1rem;
 }
 
 .menu-msg-icon:hover {
-    color: #0068ff;
+  color: #0068ff;
 }
 .menu-more {
-    border-radius: 8px;
+  border-radius: 8px;
 }

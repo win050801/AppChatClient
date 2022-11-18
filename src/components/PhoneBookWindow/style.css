@@ -1,0 +1,101 @@
+.pb-window {
+  height: 100vh;
+  background-color: #ffffff;
+  border-left: 1px solid #e0e1e3;
+}
+.pb-window-header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  font-size: 26px;
+  font-weight: bold;
+  border-bottom: 1px solid #e0e1e3;
+}
+.pb-window-body {
+  height: 90vh;
+  overflow: auto;
+  background-color: #f2f3f5;
+}
+.req {
+  display: flex;
+  flex-direction: column;
+}
+.tt {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 1rem 0 0.5rem 2.5rem;
+}
+.req .contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e0e1e3;
+  border-radius: 6px;
+  margin: 0.2rem 2.5rem;
+  width: auto;
+  height: 100%;
+  font-weight: 500;
+  font-size: 24px;
+  padding: 1rem;
+}
+.req .contact:hover {
+  background-color: #ffffff;
+}
+.req .contact:focus {
+  background-color: #ffffff;
+}
+.req .info {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+.req .btn {
+  margin-right: 2rem;
+}
+.req .btn Button {
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.sg {
+  padding-top: 1rem;
+}
+.sg-lst {
+  margin: 0 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.sg .contact {
+  height: 15rem;
+  width: 15rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sg .info span {
+  font-size: 5rem;
+}
+.sg .contact .name p {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  word-wrap: break-word;
+}
+.sg .btn Button {
+  color: #2e9bff;
+  border: 1px solid #2e9bff;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.sg .contact:hover {
+  background-color: #ffffff;
+}
+.sg .contact:focus {
+  background-color: #ffffff;
+}

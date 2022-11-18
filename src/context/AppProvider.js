@@ -16,15 +16,20 @@ export default function AppProvider({ children }) {
   const [isShowChatRoomInfo, setIsShowChatRoomInfo] = useState(false);
   const [isDeleteChatHistoryModalOpen, setIsDeleteChatHistoryModalOpen] =
     useState(false);
+  const [isDeleteGroupModalOpen, setIsDeleteGroupModalOpen] = useState(false);
   const [isRenameGroupModalOpen, setIsRenameGroupModalOpen] = useState(false);
-  const [contacts,setContacts] =useState([])
-  const [user,setUser] =useState()
-  const [room,setRoom] = useState(undefined)
-  const [roomChat,setRoomChat] = useState(undefined)
+  const [isSearchInput, setIsSearchInput] = useState(false);
+  const [isMessageWindow, setIsMessageWindow] = useState(true);
+  const [isFriendWindow, setIsFriendWindow] = useState(true);
+  const [contacts, setContacts] = useState([]);
+  const [user, setUser] = useState();
+  const [room, setRoom] = useState(undefined);
+  const [roomChat, setRoomChat] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
-  const[rooms,setRooms] = useState([])
-  const [isShowInfoRoom,setShowInfoRoom] = useState(false)
-  const[currentsocket,setcurrentsocket] = useState()
+  const [rooms, setRooms] = useState([]);
+  const [isShowInfoRoom, setShowInfoRoom] = useState(false);
+  const [currentsocket, setcurrentsocket] = useState();
+
   // const dropdownRef = useRef(null);
   // const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
@@ -39,6 +44,7 @@ export default function AppProvider({ children }) {
     setIsLogoutChatRoomModalOpen(false);
     setIsShowChatRoomInfo(false);
     setIsDeleteChatHistoryModalOpen(false);
+    setIsDeleteGroupModalOpen(false);
     setIsRenameGroupModalOpen(false);
   };
 
@@ -65,8 +71,16 @@ export default function AppProvider({ children }) {
         setIsShowChatRoomInfo,
         isDeleteChatHistoryModalOpen,
         setIsDeleteChatHistoryModalOpen,
+        isDeleteGroupModalOpen,
+        setIsDeleteGroupModalOpen,
         isRenameGroupModalOpen,
         setIsRenameGroupModalOpen,
+        isSearchInput,
+        setIsSearchInput,
+        isMessageWindow,
+        setIsMessageWindow,
+        isFriendWindow,
+        setIsFriendWindow,
         contacts,
         setContacts,
         user,
@@ -79,11 +93,13 @@ export default function AppProvider({ children }) {
         setCurrentChat,
         rooms,
         setRooms,
-        currentsocket,setcurrentsocket,
+        currentsocket,
+        setcurrentsocket,
         // isActive,
         // setIsActive,
         clearState,
-        isShowInfoRoom,setShowInfoRoom
+        isShowInfoRoom,
+        setShowInfoRoom,
       }}
     >
       {children}

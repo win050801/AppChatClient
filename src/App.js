@@ -13,6 +13,7 @@ import DeleteChatHistoryModal from "./components/Modals/DeleteChatHistoryModal";
 import LogoutChatRoomModal from "./components/Modals/LogoutChatRoomModal";
 import LogoutModal from "./components/Modals/LogoutModal";
 import RenameGroupModal from "./components/Modals/RenameGroupModal";
+import DeleteGroupModal from "./components/Modals/DeleteGroupModal";
 
 function App() {
   return (
@@ -28,10 +29,11 @@ function App() {
         <UpdateInfoUserModal />
         <AddUserModal />
         <AddGroupModal />
-        <DeleteChatHistoryModal></DeleteChatHistoryModal>
-        <LogoutChatRoomModal></LogoutChatRoomModal>
-        <LogoutModal></LogoutModal>
-        <RenameGroupModal></RenameGroupModal>
+        <DeleteChatHistoryModal />
+        <DeleteGroupModal />
+        <LogoutChatRoomModal />
+        <LogoutModal />
+        <RenameGroupModal />
       </AppProvider>
     </Router>
   );

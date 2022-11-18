@@ -1,11 +1,11 @@
 .chat-header-info {
-  height: 8vh;
+  height: 10vh;
 }
 .chat-header-info-user {
   display: flex;
 }
 .info-avatar-user {
-  height: 8vh;
+  height: 10vh;
 }
 .info-avatar-user:focus {
   background-color: #ffffff;
@@ -14,17 +14,20 @@
   background-color: #ffffff;
 }
 .info-desc {
-  padding-top: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .info-desc-name {
   font-weight: bold;
+  font-size: 18px;
 }
 /* Style Group */
 .chat-header-info-group {
   display: flex;
 }
 .info-avatar-group {
-  height: 8vh;
+  height: 10vh;
 }
 .info-avatar-group:focus {
   background-color: #ffffff;

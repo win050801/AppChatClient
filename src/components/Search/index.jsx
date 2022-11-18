@@ -9,8 +9,20 @@ import "./style.css";
 import { AppContext } from "../../context/AppProvider";
 
 export default function Search() {
-  const { setIsAddUserModalOpen, setIsAddGroupModalOpen } =
-    React.useContext(AppContext);
+  const {
+    setIsAddUserModalOpen,
+    setIsAddGroupModalOpen,
+    isSearchInput,
+    setIsSearchInput,
+  } = React.useContext(AppContext);
+
+  const handleSearch = () => {
+    setIsSearchInput(true);
+  };
+
+  const handleClose = () => {
+    setIsSearchInput(false);
+  };
 
   const handleAddUser = () => {
     setIsAddUserModalOpen(true);
@@ -22,29 +34,44 @@ export default function Search() {
 
   return (
     <div className="search">
-      <div className="search-form">
+      <div
+        className="search-form"
+        style={{
+          border: isSearchInput ? "1px solid #40A9FF" : "",
+          backgroundColor: isSearchInput ? "white" : "",
+        }}
+      >
         <SearchOutlined style={{ color: "black", fontSize: "18px" }} />
         <Input
           type="text"
           placeholder={"Tìm kiếm"}
           bordered={false}
           autoComplete="off"
+          onClick={handleSearch}
         />
       </div>
-      <div className="search-btn">
-        <Button
-          type="text"
-          icon={<UserAddOutlined />}
-          className="btn-add-user-group"
-          onClick={handleAddUser}
-        ></Button>
-        <Button
-          type="text"
-          icon={<UsergroupAddOutlined />}
-          className="btn-add-user-group"
-          onClick={handleAddGroup}
-        ></Button>
-      </div>
+      {isSearchInput ? (
+        <div className="search-btn">
+          <Button className="btn-close" onClick={handleClose}>
+            Đóng
+          </Button>
+        </div>
+      ) : (
+        <div className="search-btn">
+          <Button
+            type="text"
+            icon={<UserAddOutlined />}
+            className="btn-add-user-group"
+            onClick={handleAddUser}
+          ></Button>
+          <Button
+            type="text"
+            icon={<UsergroupAddOutlined />}
+            className="btn-add-user-group"
+            onClick={handleAddGroup}
+          ></Button>
+        </div>
+      )}
     </div>
   );
 }

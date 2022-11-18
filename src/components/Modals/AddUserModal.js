@@ -1,43 +1,51 @@
-import React, { useContext,useEffect,useState } from "react";
-import { List, Modal, Typography ,Avatar} from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { List, Modal, Typography, Avatar } from "antd";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { AppContext } from "../../context/AppProvider";
 import axios from "axios";
-import {addTT} from "../../utils/APIRoutes"
+import { addTT } from "../../utils/APIRoutes";
 import { async } from "@firebase/util";
 export default function AddUserModal() {
-  const { isAddUserModalOpen, setIsAddUserModalOpen,contacts ,roomChat,setRoomChat,rooms,setRooms} = useContext(AppContext);
-  const[members,setMembers] = useState([])
-  const [data,setdata] = useState([])
+  const {
+    isAddUserModalOpen,
+    setIsAddUserModalOpen,
+    contacts,
+    roomChat,
+    setRoomChat,
+    rooms,
+    setRooms,
+  } = useContext(AppContext);
+  const [members, setMembers] = useState([]);
+  const [data, setdata] = useState([]);
   const handleOk = async () => {
     // console.log(members);
-    const memms = [...roomChat.members]
-    
-    members.forEach(element => {
-      memms.push(element)
+    const memms = [...roomChat.members];
+
+    members.forEach((element) => {
+      memms.push(element);
     });
     const roomChatTam = {
-      id:roomChat.id,
-      manager:roomChat.manager,
-      roomName:roomChat.roomName,
-      members:memms,
-      createdAt:roomChat.createdAt,
-      blockChat:roomChat.blockChat
-    }
+      id: roomChat.id,
+      manager: roomChat.manager,
+      roomName: roomChat.roomName,
+      members: memms,
+      createdAt: roomChat.createdAt,
+      blockChat: roomChat.blockChat,
+    };
 
-    const roomsTam= [...rooms]
-    roomsTam.splice(rooms.indexOf(roomChat),1,roomChatTam)
+    const roomsTam = [...rooms];
+    roomsTam.splice(rooms.indexOf(roomChat), 1, roomChatTam);
     // console.log(roomsTam);
-    setRooms(roomsTam)
+    setRooms(roomsTam);
 
-    setRoomChat(roomChatTam)
+    setRoomChat(roomChatTam);
     const { data1 } = await axios.post(addTT, {
-      id:roomChat.id,
-      mems:memms,
+      id: roomChat.id,
+      mems: memms,
     });
-    setdata([])
-    setMembers([])
+    setdata([]);
+    setMembers([]);
     setIsAddUserModalOpen(false);
   };
 
@@ -45,47 +53,39 @@ export default function AddUserModal() {
     // console.log(roomChat);
     setIsAddUserModalOpen(false);
   };
-  const addMembers =(user)=>{
+  const addMembers = (user) => {
     const mems = [...members];
-    if(mems.indexOf(user._id)<0)
-    {
+    if (mems.indexOf(user._id) < 0) {
       mems.push(user._id);
-    
+
       setMembers(mems);
-    } 
-  }
- 
-  useEffect(()=>{
+    }
+  };
+
+  useEffect(() => {
     // setdata([])
-    const data1 = []
-    contacts.forEach(element => {
-      
-      if(roomChat!==undefined)
-      {
-        if(roomChat.members.indexOf(element._id)<0)
-        {
-          
-          if(data1.indexOf(element)<0)
-          {
-            data1.push(element)
+    const data1 = [];
+    contacts.forEach((element) => {
+      if (roomChat !== undefined) {
+        if (roomChat.members.indexOf(element._id) < 0) {
+          if (data1.indexOf(element) < 0) {
+            data1.push(element);
           }
         }
       }
-      
     });
     // console.log(data1);
-    setdata(data1)
-  },[isAddUserModalOpen])
-  
+    setdata(data1);
+  }, [isAddUserModalOpen]);
 
   return (
     <div>
       <Modal
-        title="Thêm Thành Viên"
+        title="Thêm bạn"
         open={isAddUserModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Thêm"
+        okText="Tìm kiếm"
         cancelText="Hủy"
       >
         <form>
@@ -103,7 +103,7 @@ export default function AddUserModal() {
               }}
             ></ReactPhoneInput>
           </div>
-          <span>Danh sách bạn bè</span>
+          <span>Có thể bạn quen</span>
           <br></br>
           {/* <List
             className="md-add-user-list"
@@ -118,18 +118,23 @@ export default function AddUserModal() {
           /> */}
           {data.map((user, index) => {
             return (
-              <div className="dsBan" >
+              <div className="dsBan">
                 <div className="click" onClick={() => addMembers(user)}>
-                  <div style={{display:"flex",flex:0.15}} ><input type={"checkbox"}></input></div>
-                  
-                  <div style={{display:"flex",flex:0.8}}>
-                    <div style={{paddingTop:7}}><Avatar src={user.avatarImage}></Avatar></div>
+                  <div style={{ display: "flex", flex: 0.15 }}>
+                    <input type={"checkbox"}></input>
+                  </div>
+
+                  <div style={{ display: "flex", flex: 0.8 }}>
+                    <div style={{ paddingTop: 7 }}>
+                      <Avatar src={user.avatarImage}></Avatar>
+                    </div>
                     <p></p>
-                    <p className="thep">{user.username}</p></div>
-                  
+                    <p className="thep">{user.username}</p>
+                  </div>
                 </div>
               </div>
-            )})}
+            );
+          })}
         </form>
       </Modal>
     </div>

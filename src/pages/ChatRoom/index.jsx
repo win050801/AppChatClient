@@ -1,4 +1,4 @@
-import React, { useState ,useEffect, useRef,useMemo,useContext} from "react";
+import React, { useState, useEffect, useRef, useMemo, useContext } from "react";
 import { Col, Row } from "antd";
 import axios from "axios";
 import Sidebar from "../../components/Sidebar";
@@ -8,72 +8,57 @@ import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { allUsersRoute, host } from "../../utils/APIRoutes";
 import { AppContext } from "../../context/AppProvider";
+import PhoneBookWindow from "../../components/PhoneBookWindow";
 export default function ChatRoom() {
   const navigate = useNavigate();
-  const { contacts, setContacts,setUser,currentChat,setCurrentChat } =
-  useContext(AppContext);
+  const {
+    contacts,
+    setContacts,
+    setUser,
+    currentChat,
+    setCurrentChat,
+    isMessageWindow,
+    isFriendWindow,
+  } = useContext(AppContext);
   // const [contacts, setContacts] = useState([]);
-  
+
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [test,settest] = useState("")
+  const [test, settest] = useState("");
   const socket = useRef();
-
-
 
   useEffect(() => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-        
       navigate("/login");
-      
     } else {
-
-  
-        setCurrentUser(
-         
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        
+      setCurrentUser(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
+      setUser(
+        JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       );
-      setUser(JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)))
-      
-     
-      
-      
-      ;
     }
-   
-      
   }, []);
 
-
-
-  
-  useEffect(()=>{
+  useEffect(() => {
     async function fetchData() {
-      
-    const id =(JSON.parse(currentUser))._id
-     
-    if (currentUser) {
-     
-      socket.current = io(host);
-      socket.current.emit("add-user", id);
-    
-      const data = await axios.post(allUsersRoute,{
-        id
-      });
-    
-        setContacts(
-         data.data
-      );
-   
+      const id = JSON.parse(currentUser)._id;
+
+      if (currentUser) {
+        socket.current = io(host);
+        socket.current.emit("add-user", id);
+
+        const data = await axios.post(allUsersRoute, {
+          id,
+        });
+
+        setContacts(data.data);
+      }
     }
-  }
     fetchData();
   }, [currentUser]);
-  const  handleChatChange = async (chat) => {
-    // 
+  const handleChatChange = async (chat) => {
+    //
     // {
 
-      await setCurrentChat(chat);
+    await setCurrentChat(chat);
     // }
     // if(chat.length!==undefined)
     // {
@@ -82,9 +67,8 @@ export default function ChatRoom() {
     //       console.log(chat[i].user._id)
     //     }
     // }
-    
   };
- 
+
   // useEffect(()=>{
   //   async function fetchData() {
   //     console.log(currentChat);
@@ -98,9 +82,19 @@ export default function ChatRoom() {
         <Sidebar contacts={contacts} changeChat={handleChatChange} />
       </Col>
       <Col span={17}>
-        <ChatWindow currentChat={currentChat} socket={socket} />
+        {/* {isMessageWindow ? (
+          <ChatWindow currentChat={currentChat} socket={socket} />
+        ) : isFriendWindow ? (
+          <PhoneBookWindow contacts={contacts} changeChat={handleChatChange} />
+        ) : (
+          <ChatWindow currentChat={currentChat} socket={socket} />
+        )} */}
+        {isMessageWindow ? (
+          <ChatWindow currentChat={currentChat} socket={socket} />
+        ) : (
+          <PhoneBookWindow contacts={contacts} changeChat={handleChatChange} />
+        )}
       </Col>
-     
     </Row>
   );
 }

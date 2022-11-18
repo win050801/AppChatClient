@@ -1,5 +1,5 @@
 .search {
-  height: 8vh;
+  height: 10vh;
   min-height: 4em;
   min-width: 4em;
   display: flex;
@@ -11,10 +11,13 @@
   background-color: #eeeff2;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   height: 50%;
-  width: 60%;
-  padding: 0 6px;
+  width: 65%;
+  padding: 0 0.5rem;
+}
+.search-form Input {
+  font-size: 18px;
 }
 .search-btn {
   width: 24%;
@@ -24,11 +27,21 @@
 }
 .btn-add-user-group {
   height: 100%;
-  border-radius: 4px;
+  width: 2.7rem;
+  border-radius: 6px;
+}
+.btn-add-user-group span {
+  font-size: 1.3rem;
 }
 .btn-add-user-group:hover {
   background-color: #eeeff2;
 }
 .btn-add-user-group:focus {
   background-color: #eeeff2;
+}
+.btn-close {
+  height: 100%;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 18px;
 }

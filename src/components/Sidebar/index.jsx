@@ -1,16 +1,13 @@
-
 import { Col, Row } from "antd";
 import MainTab from "../MainTab";
 import "./style.css";
 import Navbar from "../Navbar";
-import React, { useState ,useEffect} from "react";
+import React from "react";
 
-export default function Sidebar({contacts,changeChat}) {
-  
+export default function Sidebar({ contacts, changeChat }) {
   return (
     <div className="sidebar">
       <Row>
-        
         <Col span={4}>
           <MainTab />
         </Col>

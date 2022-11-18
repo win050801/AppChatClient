@@ -5,11 +5,12 @@
 }
 
 .chat-room-info-header {
-  height: 8vh;
+  height: 10vh;
   border-bottom: 1px #e1e4ea solid;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 0.4rem;
 }
 .chat-room-info-header span {
   font-size: 20px;
@@ -17,7 +18,7 @@
 }
 .chat-room-info-body {
   overflow-y: auto;
-  height: 92vh;
+  height: 90vh;
 }
 .chat-room-info-body-body {
   border-bottom: 10px #e1e4ea solid;
@@ -110,51 +111,54 @@
   display: flex;
   justify-content: space-between;
 }
-.room-members:hover{
-  background-color:rgb(185, 180, 180) ;
+.room-members:hover {
+  background-color: rgb(185, 180, 180);
 }
-.room-members{
+.room-members {
   display: flex;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
   padding-left: 10px;
   width: "100%";
   height: 45px;
 
   /* background-color: red; */
 }
-.laberTV{
+.laberTV {
   line-height: 35px;
 }
-
-.back{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5px;
-  border-radius: 50%;
-  /* padding-top: 2px; */
-  cursor:pointer;
-  width: 25px;
-  height: 25px;
+.btn-back {
+  border-radius: 100%;
 }
-.back:hover{
-  background-color:rgb(185, 180, 180) ;
+.btn-back:hover {
+  background-color: #eeeff2;
 }
-.btn-add{
+.btn-add {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 290px;
   height: 35px;
-  cursor:pointer;
+  cursor: pointer;
   border-radius: 5px;
   background-color: rgb(232, 231, 231);
 }
-.info-1:hover{
+.info-1:hover {
   background-color: rgb(232, 231, 231);
   /* color: rgb(176, 174, 174); */
 }
-.menuthanhvien :hover{
-  background-color:rgb(204, 202, 202);
+.menuthanhvien :hover {
+  background-color: rgb(204, 202, 202);
+}
+
+.chat-room-info-btn-setting {
+  color: red;
+  font-size: 16px;
+}
+.chat-room-info-btn-setting:hover {
+  color: red;
+}
+.chat-room-info-btn-setting:focus {
+  background-color: #e6f7ff;
+  color: #0068ff;
 }

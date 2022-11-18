@@ -9,6 +9,7 @@ export default function LogoutModal() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.clear();
     navigate("/login");
     setIsLogoutModalOpen(false);
   };

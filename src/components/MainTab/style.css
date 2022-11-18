@@ -1,6 +1,6 @@
 .main-tab {
   background-color: #0091ff;
-  min-width: 70px;
+  min-width: 50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,128 +33,36 @@
 }
 
 .menu {
-  background: #ffffff;
   border-radius: 6px;
   position: absolute;
-  top: 2.5%;
   left: 100%;
-  width: 300px;
   z-index: 10;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  padding: 0 1rem;
-}
-.menu1 {
-  background: #ffffff;
-  border-radius: 6px;
-  position: absolute;
-  top: 250px;
-  left: 70px;
-  width: 240px;
-  z-index: 10;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  padding: 0 1rem;
 }
 
-
-.menu.active {
-  opacity: 1;
-  visibility: visible;
-}
-.menu1.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.menu1 ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu li {
-  padding: 0.5rem 0;
-}
-.menu1 li {
-  padding: 0.5rem 0;
-}
-
-.menu Button {
+.menu span {
   font-size: 16px;
-  width: 100%;
-  text-align: left;
-  padding-left: 0;
 }
 
 .menu Button:hover {
-  background-color: #dddddd;
+  background-color: #f5f5f5;
 }
 
-.menu-header {
+.menu-info {
+  width: 250px;
+  top: -3rem;
+}
+
+.menu-info-header span {
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid #dddddd;
+  padding: 0.4rem;
 }
 
-.menu-body {
-  border-bottom: 1px solid #dddddd;
+.menu-info-header:hover {
+  background-color: white;
 }
 
-/* Style menu setting */
 .menu-setting {
-  background: #ffffff;
-  border-radius: 6px;
-  position: absolute;
-  top: 2.5%;
-  left: 100%;
-  width: 300px;
-  z-index: 10;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  padding: 0 1rem;
-}
-
-.menu-setting.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.menu-setting ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu-setting li {
-  padding: 0.5rem 0;
-}
-
-.menu-setting Button {
-  font-size: 16px;
-  width: 100%;
-  text-align: left;
-  padding-left: 0;
-}
-
-.menu-setting Button:hover {
-  background-color: #dddddd;
-}
-
-.menu-setting-header {
-  font-size: 18px;
-  font-weight: bold;
-  border-bottom: 1px solid #dddddd;
-}
-
-.menu-setting-body {
-  border-bottom: 1px solid #dddddd;
+  bottom: -2rem;
 }
