@@ -27,3 +27,22 @@ export const fileMessageSend = `${host}/api/messages/file-message-send`;
 export const deleteMessageFromSelf = `${host}/api/messages/delete-message-fromSelf`;
 //Delete Message ToAll
 export const deleteMessageToAll = `${host}/api/messages/delete-message-toAll`;
+
+//Get User By PhoneNumber
+export const getUserByPhoneNumber = `${host}/api/friend/getUserByPhoneNumber`;
+//Add Friend
+export const addFriend = `${host}/api/friend/addFriend`;
+//Get Current Friend
+export const getCurrentFriend = `${host}/api/friend/getCurrentFriend`;
+//getIdOfListFriendByPhoneNumber
+export const getIdOfListFriendByPhoneNumber = `${host}/api/friend/getIdOfListFriendByPhoneNumber`;
+//Get All Current Friend
+export const getAllCurrentFriend = `${host}/api/friend/getAllCurrentFriend`;
+//Request Friend
+export const requestFriend = `${host}/api/requestFriend/requestFriend`;
+//Get All Request Friend By Id
+export const getAllFriendRequstById = `${host}/api/requestFriend/getAllFriendRequstById`;
+//Agree Request Friend
+export const agreeRequestFriend = `${host}/api/requestFriend/agreeRequestFriend`;
+// Reject Request Friend
+export const rejectRequestFriend = `${host}/api/requestFriend/rejectRequestFriend`;
