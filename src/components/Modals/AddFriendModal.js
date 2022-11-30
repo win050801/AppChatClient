@@ -25,12 +25,11 @@ export default function AddFriendModal() {
     const {
         isAddFriendModalOpen,
         setIsAddFriendModalOpen,
-        contacts,
-        roomChat,
-        setRoomChat,
-        rooms,
-        setRooms,
+
         setIsInfoUserModalOpen,
+        setIsInfoUserOtherModalOpen,
+        currentSearch,
+        setCurrentSearch,
     } = useContext(AppContext);
     const data_loimoi = [
         {
@@ -55,6 +54,7 @@ export default function AddFriendModal() {
             currentUserId: currentUser._id,
             phoneNumber: phoneNumber,
         });
+
         const listCurrentFriend = await axios.post(getCurrentFriend, {
             currentUserId: currentUser._id,
         });
@@ -81,7 +81,8 @@ export default function AddFriendModal() {
                 response.data.data[0].phonenumber
             ) !== -1
         ) {
-            setIsInfoUserModalOpen(true);
+            setCurrentSearch(response.data.data);
+            setIsInfoUserOtherModalOpen(true);
             handleCancel();
         }
         if (response.data.data[0].phonenumber !== currentUser.phonenumber) {

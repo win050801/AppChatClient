@@ -1,114 +1,164 @@
 .ant-modal-body {
-  flex-direction: column;
-  display: flex;
+    flex-direction: column;
+    display: flex;
 }
 .md-info-user-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .md-info-user-avt {
-  margin-top: -35px;
+    margin-top: -35px;
 }
 .md-info-user-header span {
-  font-size: 22px;
-  font-weight: bold;
+    font-size: 22px;
+    font-weight: bold;
 }
 .md-info-user-body {
-  height: 16rem;
+    height: 16rem;
 }
 .md-info-user-body span {
-  padding: 0.5rem 0;
+    padding: 0.5rem 0;
 }
 .md-info-user-body-bd {
-  display: flex;
-  font-size: 16px;
+    display: flex;
+    font-size: 16px;
 }
 .md-info-user-body-bd-1 {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
 }
 .md-info-user-body-bd-2 {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .md-info-user-body Button {
-  width: 100%;
-  height: 50px;
-  margin-top: 50px;
-  font-weight: bold;
-  font-size: 16px;
-  border: none;
-  background-color: #d2d2d2;
+    width: 100%;
+    height: 50px;
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    background-color: #d2d2d2;
 }
 .md-info-user-body Button:hover {
-  background-color: #c3c3c3;
-  color: black;
+    background-color: #c3c3c3;
+    color: black;
 }
 
 /* Style UpdateInfoUserModal */
 .ddfaZm {
-  margin-top: -35px;
+    margin-top: -35px;
 }
 
 .md-info-user-header div {
-  border: none;
+    border: none;
 }
 .md-info-user-header input {
-  width: 70px;
-  height: 70px;
+    width: 70px;
+    height: 70px;
 }
 .md-u-info-user-form-body {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 .md-u-info-user-form-body span {
-  margin: 2px 0;
+    margin: 2px 0;
 }
 
 .md-add-user-input {
-  margin: -10px 0 20px 0;
+    margin: -10px 0 20px 0;
 }
 .md-add-user-list {
-  height: 300px;
-  overflow-y: auto;
+    height: 300px;
+    overflow-y: auto;
 }
 
 .md-add-group-header-name {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .md-add-group-header-name-input {
-  height: 50px;
-  width: 86%;
+    height: 50px;
+    width: 86%;
 }
-.dsBan{
-  display: flex;
-  justify-items: flex-start;
-  align-items: center;
-  width: "100%";
-  height: "100%";
-  /* height: 70px; */
-  /* background-color: red; */
+.dsBan {
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    width: "100%";
+    height: "100%";
+    /* height: 70px; */
+    /* background-color: red; */
 }
-.dsBan :hover{
+.dsBan :hover {
+    background-color: #eeeff2;
+}
+.avt {
+    width: 70px;
+    height: 70px;
+}
+.click {
+    display: flex;
+    width: 350px;
+    height: 60px;
+    align-items: center;
+    /* justify-content: center; */
+    /* background-color: aqua; */
+}
+.thep {
+    padding-top: 12px;
+}
 
-  background-color: #eeeff2;
+.user-other {
+    border-bottom: 0.4rem solid #d6dbe1;
 }
-.avt{
-  width: 70px;
-  height: 70px;
+.user-orther-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
-.click{
-  display: flex;
-  width: 350px;
-  height: 60px;
-  align-items: center;
-  /* justify-content: center; */
-  /* background-color: aqua; */
+.user-orther-btn Button {
+    width: 50%;
+    height: 100%;
+    margin: 0.5rem;
+    border-radius: 6px;
+    background-color: #d6dbe1;
 }
-.thep{
-  padding-top: 12px;
+.user-orther-btn Button:hover {
+    background-color: #b7bcc7;
+}
+.user-orther-btn Button:focus {
+    background-color: #b7bcc7;
+}
+.user-orther-btn Button span {
+    font-size: 16px;
+}
+.user-other-body {
+    height: 100%;
+    padding: 0.5rem;
+}
+.user-other-footer {
+    display: flex;
+    flex-direction: column;
+}
+.user-other-footer Button {
+    width: 100%;
+    height: 3rem;
+    border-bottom: 1px solid #d6dbe1;
+}
+.user-other-footer Button:hover {
+    background-color: #f3f5f6;
+}
+.user-other-footer Button:focus {
+    background-color: #d6dbe1;
+}
+.user-other-footer Button span {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
 }

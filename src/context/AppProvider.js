@@ -31,7 +31,12 @@ export default function AppProvider({ children }) {
     const [isShowInfoRoom, setShowInfoRoom] = useState(false);
     const [currentsocket, setcurrentsocket] = useState();
     const [listCurrentFriend, setListCurrentFriend] = useState([]);
-
+    const [isInfoUserOtherModalOpen, setIsInfoUserOtherModalOpen] =
+        useState(false);
+    const [currentSearch, setCurrentSearch] = useState([]);
+    const currentUser = JSON.parse(
+        localStorage.getItem("chat-app-current-user")
+    );
     // const dropdownRef = useRef(null);
     // const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
@@ -48,11 +53,17 @@ export default function AppProvider({ children }) {
         setIsDeleteChatHistoryModalOpen(false);
         setIsDeleteGroupModalOpen(false);
         setIsRenameGroupModalOpen(false);
+        setIsInfoUserOtherModalOpen(false);
     };
 
     return (
         <AppContext.Provider
             value={{
+                currentUser,
+                currentSearch,
+                setCurrentSearch,
+                isInfoUserOtherModalOpen,
+                setIsInfoUserOtherModalOpen,
                 listCurrentFriend,
                 setListCurrentFriend,
                 isInfoUserModalOpen,

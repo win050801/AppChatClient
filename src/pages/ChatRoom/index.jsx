@@ -43,17 +43,18 @@ export default function ChatRoom() {
 
     useEffect(() => {
         async function fetchData() {
-            const id = JSON.parse(currentUser)._id;
+            if (currentUser !== null) {
+                const id = JSON.parse(currentUser)._id;
 
-            if (currentUser) {
-                socket.current = io(host);
-                socket.current.emit("add-user", id);
+                if (currentUser) {
+                    socket.current = io(host);
+                    socket.current.emit("add-user", id);
 
-                const data = await axios.post(allUsersRoute, {
-                    id,
-                });
-
-                setContacts(data.data);
+                    const data = await axios.post(allUsersRoute, {
+                        id,
+                    });
+                    setContacts(data.data);
+                }
             }
         }
         fetchData();

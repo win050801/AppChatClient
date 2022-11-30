@@ -15,30 +15,32 @@ import LogoutModal from "./components/Modals/LogoutModal";
 import RenameGroupModal from "./components/Modals/RenameGroupModal";
 import DeleteGroupModal from "./components/Modals/DeleteGroupModal";
 import AddFriendModal from "./components/Modals/AddFriendModal";
+import InfoUserOtherModal from "./components/Modals/InfoUserOtherModal";
 
 function App() {
-  return (
-    <Router>
-      <AppProvider>
-        <Routes>
-          <Route element={<Login />} path="/login" />
-          <Route element={<Register />} path="/register" />
-          <Route element={<RePassword />} path="/repassword" />
-          <Route element={<ChatRoom />} path="/" />
-        </Routes>
-        <InfoUserModal />
-        <UpdateInfoUserModal />
-        <AddUserModal />
-        <AddGroupModal />
-        <AddFriendModal />
-        <DeleteChatHistoryModal />
-        <DeleteGroupModal />
-        <LogoutChatRoomModal />
-        <LogoutModal />
-        <RenameGroupModal />
-      </AppProvider>
-    </Router>
-  );
+    return (
+        <Router>
+            <AppProvider>
+                <Routes>
+                    <Route element={<Login />} path="/login" />
+                    <Route element={<Register />} path="/register" />
+                    <Route element={<RePassword />} path="/repassword" />
+                    <Route element={<ChatRoom />} path="/" />
+                </Routes>
+                <InfoUserModal />
+                <InfoUserOtherModal />
+                <UpdateInfoUserModal />
+                <AddUserModal />
+                <AddGroupModal />
+                <AddFriendModal />
+                <DeleteChatHistoryModal />
+                <DeleteGroupModal />
+                <LogoutChatRoomModal />
+                <LogoutModal />
+                <RenameGroupModal />
+            </AppProvider>
+        </Router>
+    );
 }
 
 export default App;

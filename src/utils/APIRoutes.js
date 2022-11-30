@@ -46,3 +46,6 @@ export const getAllFriendRequstById = `${host}/api/requestFriend/getAllFriendReq
 export const agreeRequestFriend = `${host}/api/requestFriend/agreeRequestFriend`;
 // Reject Request Friend
 export const rejectRequestFriend = `${host}/api/requestFriend/rejectRequestFriend`;
+
+// Cập nhập thông tin cá nhân
+export const updateUser = `${host}/api/auth/updateUser`;
