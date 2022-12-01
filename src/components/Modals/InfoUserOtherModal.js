@@ -9,6 +9,15 @@ import {
     TeamOutlined,
 } from "@ant-design/icons";
 import "./style.css";
+import axios from "axios";
+import {
+    unFriend,
+    getUserByPhoneNumber,
+    checkSendedRequestAddFriend,
+    host,
+} from "../../utils/APIRoutes";
+import { io } from "socket.io-client";
+import { useRef } from "react";
 
 export default function InfoUserOtherModal() {
     const {
@@ -16,12 +25,23 @@ export default function InfoUserOtherModal() {
         setIsInfoUserOtherModalOpen,
         currentSearch,
         setCurrentSearch,
+        listCurrentFriend,
+        setSendedRequst,
+        phoneNumber,
+        setPhoneNumber,
+        currentUser,
+        currentChat,
+        getCurrentFriend,
+        setListCurrentFriend,
+        setCurrentChat,
+        roomChat,
     } = useContext(AppContext);
+    const socket = useRef();
 
     const handleCancel = () => {
         setIsInfoUserOtherModalOpen(false);
     };
-
+    const [listCurrentFriendPhone, setListCurrentFriendPhone] = [];
     const user = {
         displayName: "Trần Nguyễn Kha Vỹ",
         photoURL: "",
@@ -31,7 +51,62 @@ export default function InfoUserOtherModal() {
         isFriend: false,
         generalGroup: 3,
     };
+    const handleAddOrUnFriend = () => {
+        listCurrentFriend.map((m, i) => {
+            listCurrentFriendPhone.push(m.phonenumber);
+        });
+        console.log(listCurrentFriend.indexOf(phoneNumber));
+        if (listCurrentFriend.indexOf(phoneNumber) === -1) {
+            return true;
+        }
+        return false;
+    };
+    const handleUnFriend = async () => {
+        console.log("UnFriend");
 
+        if (phoneNumber === "" || phoneNumber === null) {
+            const userByPhoneNumber = await axios.post(getUserByPhoneNumber, {
+                phoneNumber: currentChat.phonenumber,
+            });
+            const res = await axios.post(unFriend, {
+                received: userByPhoneNumber.data.data[0]._id,
+                receivedPhoneNumber: userByPhoneNumber.data.data[0].phonenumber,
+                senderId: currentUser._id,
+                senderPhoneNumber: currentUser.phonenumber,
+            });
+            setListCurrentFriend(res.data.data);
+            socket.current = io(host);
+            socket.current.emit("unfriend", {
+                to: userByPhoneNumber.data.data[0]._id,
+            });
+
+            // const checkSended = await axios.post(checkSendedRequestAddFriend, {
+            //     senderId: currentUser.phonenumber,
+            //     received: userByPhoneNumber.data.data[0].phonenumber,
+            // });
+
+            // setSendedRequst(checkSended.data);
+        } else {
+            const userByPhoneNumber = await axios.post(getUserByPhoneNumber, {
+                phoneNumber: phoneNumber,
+            });
+            const res = await axios.post(unFriend, {
+                received: userByPhoneNumber.data.data[0]._id,
+                receivedPhoneNumber: userByPhoneNumber.data.data[0].phonenumber,
+                senderId: currentUser._id,
+                senderPhoneNumber: currentUser.phonenumber,
+            });
+            // const checkSended = await axios.post(checkSendedRequestAddFriend, {
+            //     senderId: currentUser.phonenumber,
+            //     received: phoneNumber,
+            // });
+
+            // setSendedRequst(checkSended.data);
+        }
+        setCurrentChat(undefined);
+        alert("Hủy kết bạn thành công");
+        handleCancel();
+    };
     return (
         <div>
             <Modal
@@ -79,8 +154,13 @@ export default function InfoUserOtherModal() {
                                         />
                                     </div>
                                     <div className="user-orther-btn">
-                                        {user.isFriend ? (
-                                            ""
+                                        {handleAddOrUnFriend ? (
+                                            <Button
+                                                onClick={handleUnFriend}
+                                                type="text"
+                                            >
+                                                Hủy kết bạn
+                                            </Button>
                                         ) : (
                                             <Button type="text">Kết bạn</Button>
                                         )}
@@ -104,8 +184,10 @@ export default function InfoUserOtherModal() {
                                         </div>
                                         <div className="md-info-user-body-bd-2">
                                             <span>{m.phonenumber}</span>
-                                            <span>{user.gender}</span>
-                                            <span>{user.birthday}</span>
+                                            <span>
+                                                {m.gender ? "Nam" : "Nữ"}
+                                            </span>
+                                            <span>{m.DateOfBirth}</span>
                                         </div>
                                     </div>
                                 </div>

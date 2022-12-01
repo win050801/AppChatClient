@@ -84,7 +84,11 @@ export default function ChatRoom() {
     return (
         <Row>
             <Col span={7}>
-                <Sidebar contacts={contacts} changeChat={handleChatChange} />
+                <Sidebar
+                    contacts={contacts}
+                    changeChat={handleChatChange}
+                    socket={socket}
+                />
             </Col>
             <Col span={17}>
                 {/* {isMessageWindow ? (

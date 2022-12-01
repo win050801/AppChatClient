@@ -37,10 +37,17 @@ export default function AppProvider({ children }) {
     const currentUser = JSON.parse(
         localStorage.getItem("chat-app-current-user")
     );
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [isOpenNotify, setIsOpenNotify] = useState(false);
+    const [title, setTilte] = useState("Bạn có muốn đăng xuất khỏi Yola");
+    const [listRequest, setListRequest] = useState([]);
+    const [listSendedRequest, setListSendedRequest] = useState([]);
+
     // const dropdownRef = useRef(null);
     // const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
     const clearState = () => {
+        setIsOpenNotify(false);
         setIsInfoUserModalOpen(false);
         setIsInfoGroupModalOpen(false);
         setIsUpdateInfoUserModalOpen(false);
@@ -59,12 +66,27 @@ export default function AppProvider({ children }) {
     return (
         <AppContext.Provider
             value={{
+                listSendedRequest,
+                setListSendedRequest,
+                //Danh sách yêu cầu kết bạn
+                listRequest,
+                setListRequest,
+                //Số điện thoại đang search
+                phoneNumber,
+                setPhoneNumber,
+                // User hiện tại sử dụng hệ thống
                 currentUser,
+                // User đang muốn tìm kiếm
                 currentSearch,
                 setCurrentSearch,
                 isInfoUserOtherModalOpen,
                 setIsInfoUserOtherModalOpen,
+                // Danh sách User trong danh sách bạn bè
                 listCurrentFriend,
+                title,
+                setTilte,
+                isOpenNotify,
+                setIsOpenNotify,
                 setListCurrentFriend,
                 isInfoUserModalOpen,
                 setIsInfoUserModalOpen,

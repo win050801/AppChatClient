@@ -17,6 +17,7 @@ import {
     getAllCurrentFriend,
     getAllFriendRequstById,
     rejectRequestFriend,
+    checkSendedRequestAddFriend,
 } from "../../utils/APIRoutes";
 import "../PhoneBookWindow/style.css";
 import { da } from "date-fns/locale";
@@ -30,6 +31,15 @@ export default function AddFriendModal() {
         setIsInfoUserOtherModalOpen,
         currentSearch,
         setCurrentSearch,
+        phoneNumber,
+        setPhoneNumber,
+        setIsOpenNotify,
+        title,
+        setTitle,
+        listRequest,
+        setListRequest,
+        listSendedRequest,
+        setListSendedRequest,
     } = useContext(AppContext);
     const data_loimoi = [
         {
@@ -42,13 +52,19 @@ export default function AddFriendModal() {
     const [friend, setFriend] = useState([]);
     const [listCurrentFriend, setListCurrentFriend] = useState();
     const [sendedRequest, setSendedRequst] = useState(true);
+    const [listWait, setListWait] = useState([]);
+
     const socket = useRef();
 
-    const [phoneNumber, setPhoneNumber] = useState("");
+    // const [phoneNumber, setPhoneNumber] = useState("");
     const currentUser = JSON.parse(
         localStorage.getItem("chat-app-current-user")
     );
 
+    useEffect(() => {
+        async function fetchData() {}
+        fetchData();
+    }, []);
     const handleOk = async () => {
         const response = await axios.post(getUserByPhoneNumber, {
             currentUserId: currentUser._id,
@@ -63,6 +79,7 @@ export default function AddFriendModal() {
             phoneNumber: phoneNumber,
             currentPhoneNumber: currentUser.phonenumber,
         });
+
         const allRequestFriendDoNotAgree = allSendedRequest.data.data4;
         const listAllRequestDoNotAgree = [];
         allRequestFriendDoNotAgree.map((m, i) => {
@@ -73,8 +90,13 @@ export default function AddFriendModal() {
         listCurrentFriend.data.data2.map((m, i) => {
             listCurrentFriendPhone.push(m.phonenumber);
         });
+        //Kiểm tra đã gửi lời mời hay chưa
         if (listAllRequestDoNotAgree.indexOf(phoneNumber) !== -1) {
-            setSendedRequst(false);
+            const checkSended = await axios.post(checkSendedRequestAddFriend, {
+                senderId: currentUser.phonenumber,
+                received: phoneNumber,
+            });
+            setSendedRequst(checkSended.data);
         }
         if (
             listCurrentFriendPhone.indexOf(
@@ -87,16 +109,22 @@ export default function AddFriendModal() {
         }
         if (response.data.data[0].phonenumber !== currentUser.phonenumber) {
             setData(response.data.data[0]);
+            console.log(data);
             setFriend(response.data.data2);
+            console.log(friend);
         } else {
             setIsInfoUserModalOpen(true);
             handleCancel();
         }
+        setListWait([""]);
     };
 
     const handleCancel = () => {
         setIsAddFriendModalOpen(false);
         setData([]);
+        setIsOpenNotify(true);
+        setPhoneNumber("");
+        setListWait([]);
     };
     const addMembers = (user) => {
         const mems = [...members];
@@ -111,31 +139,21 @@ export default function AddFriendModal() {
             received: data.phonenumber,
             senderId: currentUser.phonenumber,
         });
+
+        socket.current = io(host);
+        console.log(response.data.data);
+        console.log(listRequest);
+        socket.current.emit("send-request-add-friend", {
+            response: response.data.data2,
+            to: data._id,
+        });
+        const checkSended = await axios.post(checkSendedRequestAddFriend, {
+            senderId: currentUser.phonenumber,
+            received: phoneNumber,
+        });
+        setSendedRequst(checkSended.data);
+        alert("Gửi lời mời kết bạn thành công");
         handleCancel();
-        setPhoneNumber("");
-
-        <div className="Messtbt" id="Messtbt">
-            <p>Gửi yêu cầu kết bạn thành công</p>
-        </div>;
-
-        // socket.current = io(host);
-        // console.log(socket.current.Socket);
-        // socket.current.emit("send-request-add-friend", socket.current);
-        // const response = await axios.post(getCurrentFriend, {
-        //     currentUserId: currentUser._id,
-        // });
-
-        // const newListFriend = [...response.data.data];
-        // console.log(newListFriend.indexOf(data._id));
-        // if (newListFriend.indexOf(data._id) === -1) {
-        //     newListFriend.push(data._id);
-        // }
-
-        // console.log(newListFriend);
-        // const res = await axios.post(addFriend, {
-        //     listFriendOfId: friend,
-        //     friendId: newListFriend,
-        // });
     };
 
     const handleRemovelAddFriend = async () => {
@@ -144,7 +162,14 @@ export default function AddFriendModal() {
             received: phoneNumber,
             senderId: currentUser.phonenumber,
         });
+
         setSendedRequst(true);
+
+        socket.current = io(host);
+        socket.current.emit("reject-request-add-friend", {
+            currentPhoneNumber: phoneNumber,
+            to: data._id,
+        });
     };
 
     return (
@@ -176,45 +201,49 @@ export default function AddFriendModal() {
                             }}
                         ></ReactPhoneInput>
                     </div>
-                    <span>Có thể bạn quen</span>
+
                     <div>
-                        <Button className="contact" type="text">
-                            <div className="info">
-                                <Avatar size={80} src={data.avatarImage}>
-                                    {data.avatarImage
-                                        ? ""
-                                        : data.username
-                                              ?.charAt(0)
-                                              ?.toUpperCase()}
-                                </Avatar>
-                                <span style={{ marginLeft: "0.8rem" }}>
-                                    {data.username}
-                                </span>
-                            </div>
-                            <div className="btn">
-                                {sendedRequest ? (
-                                    <Button
-                                        onClick={handleAddFriend}
-                                        style={{
-                                            color: "#2E9BFF",
-                                            border: "1px solid #2E9BFF",
-                                        }}
-                                    >
-                                        Kết bạn
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        onClick={handleRemovelAddFriend}
-                                        style={{
-                                            color: "#2E9BFF",
-                                            border: "1px solid #2E9BFF",
-                                        }}
-                                    >
-                                        Hủy kết bạn
-                                    </Button>
-                                )}
-                            </div>
-                        </Button>
+                        {listWait.length === 0 ? (
+                            ""
+                        ) : (
+                            <Button className="contact" type="text">
+                                <div className="info">
+                                    <Avatar size={80} src={data.avatarImage}>
+                                        {data.avatarImage
+                                            ? ""
+                                            : data.username
+                                                  ?.charAt(0)
+                                                  ?.toUpperCase()}
+                                    </Avatar>
+                                    <span style={{ marginLeft: "0.8rem" }}>
+                                        {data.username}
+                                    </span>
+                                </div>
+                                <div className="btn">
+                                    {sendedRequest === true ? (
+                                        <Button
+                                            onClick={handleAddFriend}
+                                            style={{
+                                                color: "#2E9BFF",
+                                                border: "1px solid #2E9BFF",
+                                            }}
+                                        >
+                                            Kết bạn
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            onClick={handleRemovelAddFriend}
+                                            style={{
+                                                color: "#2E9BFF",
+                                                border: "1px solid #2E9BFF",
+                                            }}
+                                        >
+                                            Hủy kết bạn
+                                        </Button>
+                                    )}
+                                </div>
+                            </Button>
+                        )}
                     </div>
 
                     <br></br>

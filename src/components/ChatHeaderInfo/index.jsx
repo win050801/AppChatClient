@@ -5,8 +5,13 @@ import "./style.css";
 import { AppContext } from "../../context/AppProvider";
 
 export default function ChatHeaderInfo({ currentChat }) {
-    const { roomChat, contacts, user, setIsInfoUserOtherModalOpen } =
-        useContext(AppContext);
+    const {
+        roomChat,
+        contacts,
+        user,
+        setIsInfoUserOtherModalOpen,
+        setCurrentSearch,
+    } = useContext(AppContext);
 
     const [name, setname] = useState("");
 
@@ -26,7 +31,7 @@ export default function ChatHeaderInfo({ currentChat }) {
             setname(currentChat.username);
             // setMembers([])
         }
-    });
+    }, []);
 
     const user1 = {
         displayName: name,
@@ -35,7 +40,10 @@ export default function ChatHeaderInfo({ currentChat }) {
     };
 
     const handleOpenInfo = () => {
-        console.log("Info User");
+        // setCurrentSearch(currentChat);
+        const chatCurrent = [];
+        chatCurrent.push(currentChat);
+        setCurrentSearch(chatCurrent);
         setIsInfoUserOtherModalOpen(true);
     };
 
@@ -62,7 +70,7 @@ export default function ChatHeaderInfo({ currentChat }) {
                     </Button>
                     <div className="info-desc">
                         <Typography.Text className="info-desc-name">
-                            {user1.displayName}
+                            {currentChat.username}
                         </Typography.Text>
                         <Typography.Text className="onlineStatus">
                             {user1.onlineStatus}

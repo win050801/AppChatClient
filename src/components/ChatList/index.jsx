@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Tabs, Avatar, List } from "antd";
 import "./style.css";
 import axios from "axios";
 import { getRoom } from "../../utils/APIRoutes";
 import { AppContext } from "../../context/AppProvider";
-import { getCurrentFriend, getAllCurrentFriend } from "../../utils/APIRoutes";
+import {
+    getCurrentFriend,
+    getAllCurrentFriend,
+    host,
+} from "../../utils/APIRoutes";
 
-export default function ChatList({ contacts, changeChat }) {
+export default function ChatList({ contacts, changeChat, socket }) {
     const {
         room,
         user,
@@ -35,10 +39,37 @@ export default function ChatList({ contacts, changeChat }) {
             });
             setListCurrentFriend(response.data.data2);
 
-            console.log(listCurrentFriend);
+            if (socket.current) {
+                socket.current.on("list-friend-add-into", async (data) => {
+                    console.log(data.data);
+                    const response = await axios.post(getCurrentFriend, {
+                        currentUserId: data.data,
+                    });
+                    console.log(response);
+                    setListCurrentFriend(response.data.data2);
+                });
+                socket.current.on("un-friend", async (data) => {
+                    console.log(data.data);
+                    const response = await axios.post(getCurrentFriend, {
+                        currentUserId: data.data,
+                    });
+                    console.log(response);
+                    setListCurrentFriend(response.data.data2);
+                });
+            }
         }
         fetchData();
     }, []);
+
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const response = await axios.post(getCurrentFriend, {
+    //             currentUserId: currentUser._id,
+    //         });
+    //         setListCurrentFriend(response.data.data2);
+    //     }
+    //     fetchData();
+    // }, []);
 
     const click = (contact) => {
         changeChat(contact);
@@ -49,14 +80,12 @@ export default function ChatList({ contacts, changeChat }) {
     };
     useEffect(() => {
         async function fetchData() {
-            //  console.log(id);
             if (user) {
                 try {
                     const data = await axios.post(getRoom, {
                         id: user._id,
                     });
                     setRooms(data.data);
-                    // console.log(data.data[0].members);
                 } catch (error) {
                     console.log(error);
                 }
@@ -65,7 +94,6 @@ export default function ChatList({ contacts, changeChat }) {
         fetchData();
     }, [user]);
 
-    // console.log(rooms);
     return (
         <div className="chatlist">
             <Tabs defaultActiveKey="1" className="tabs">

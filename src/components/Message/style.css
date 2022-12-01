@@ -53,6 +53,7 @@
     border-radius: 5px;
     color: white;
     align-items: center;
+    justify-content: center;
     text-align: center;
     z-index: 5;
     display: flex;

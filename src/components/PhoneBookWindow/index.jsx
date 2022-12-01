@@ -18,6 +18,7 @@ import {
     getAllCurrentFriend,
 } from "../../utils/APIRoutes";
 import { useState } from "react";
+import { Socket } from "socket.io-client";
 
 export default function PhoneBookWindow({ contacts, changeChat, socket }) {
     const {
@@ -28,46 +29,18 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
         setIsMessageWindow,
         isFriendWindow,
         setIsFriendWindow,
+        listRequest,
+        setListRequest,
+        setListSendedRequest,
+        listSendedRequest,
     } = useContext(AppContext);
 
     const currentUser = JSON.parse(
         localStorage.getItem("chat-app-current-user")
     );
-    const [listRequest, setListRequest] = useState([]);
     const [listRequestDissAgree, setListRequestDissAgree] = useState([]);
     const [friend, setFriend] = useState([]);
-    const themVaoBanBeNguoiNhan = async (dt) => {
-        const response = await axios.post(getCurrentFriend, {
-            currentUserId: currentUser._id,
-        });
 
-        const newListFriend = [...response.data.data];
-
-        if (newListFriend.indexOf(dt._id) === -1) {
-            newListFriend.push(dt._id);
-        }
-
-        const res = await axios.post(addFriend, {
-            listFriendOfId: friend,
-            friendId: newListFriend,
-        });
-    };
-    const themVaoBanBeNguoiGui = async (dt) => {
-        const response = await axios.post(getCurrentFriend, {
-            currentUserId: currentUser._id,
-        });
-
-        const newListFriend = [...response.data.data];
-
-        if (newListFriend.indexOf(dt._id) === -1) {
-            newListFriend.push(dt._id);
-        }
-
-        const res = await axios.post(addFriend, {
-            listFriendOfId: friend,
-            friendId: newListFriend,
-        });
-    };
     const data_loimoi = [
         {
             ten: "ABC",
@@ -80,7 +53,18 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
             avatarImage: icon_friend,
         },
     ];
-    const handleAgreeFriendRequest = () => {};
+    const socketAgreeRequestFriend = async (dt) => {
+        const response = await axios.post(getCurrentFriend, {
+            currentUserId: currentUser._id,
+        });
+        // console.log(response.data.data2);
+
+        socket.current.emit("add-into-list-friend", {
+            data: response.data.data2,
+            to: dt._id,
+            from: currentUser._id,
+        });
+    };
     useEffect(() => {
         async function fetchData() {
             const response = await axios.post(getIdOfListFriendByPhoneNumber, {
@@ -98,8 +82,29 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
             const response = await axios.post(getAllFriendRequstById, {
                 currentPhoneNumber: currentUser.phonenumber,
             });
-
             setListRequest(response.data.data);
+
+            if (socket.current) {
+                socket.current.on(
+                    "add-friend-request",
+                    async (requestFriend) => {
+                        const res1 = await axios.post(getAllFriendRequstById, {
+                            currentPhoneNumber: currentUser.phonenumber,
+                        });
+                        // list.push(requestFriend.requestFriend[0]);
+                        // console.log(list);
+                        console.log(res1.data.data);
+                        setListRequest(res1.data.data);
+                    }
+                );
+                socket.current.on("add-friend-reject-request", async (data) => {
+                    console.log(data.currentPhoneNumber);
+                    const res2 = await axios.post(getAllFriendRequstById, {
+                        currentPhoneNumber: data.currentPhoneNumber,
+                    });
+                    setListRequest(res2.data.data);
+                });
+            }
         }
         fetchData();
     }, []);
@@ -146,6 +151,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                                 }
                                             );
                                             const list = [...listRequest];
+
                                             const index = list.indexOf(dt);
                                             if (index > -1) {
                                                 list.splice(index, 1);
@@ -161,7 +167,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                     </Button>
                                     <Button
                                         onClick={async () => {
-                                            // themVaoBanBeNguoiNhan();
+                                            // Update request bằng true
                                             const res1 = await axios.post(
                                                 agreeRequestFriend,
                                                 {
@@ -170,6 +176,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                                     senderId: dt.phonenumber,
                                                 }
                                             );
+
                                             const list = [...listRequest];
                                             const index = list.indexOf(dt);
                                             if (index > -1) {
@@ -196,7 +203,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                             ) {
                                                 newListFriend.push(dt._id);
                                             }
-
+                                            console.log(friend);
                                             const res = await axios.post(
                                                 addFriend,
                                                 {
@@ -204,6 +211,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                                     friendId: newListFriend,
                                                 }
                                             );
+
                                             // Thêm vào danh sách bạn bè người gửi
                                             const getIdListSender =
                                                 await axios.post(
@@ -238,6 +246,7 @@ export default function PhoneBookWindow({ contacts, changeChat, socket }) {
                                                     friendId:
                                                         newListFriendSender,
                                                 });
+                                            socketAgreeRequestFriend(dt);
                                         }}
                                         type="primary"
                                     >

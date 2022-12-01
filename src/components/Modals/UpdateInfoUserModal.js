@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, DatePicker, Image, Input, Modal, Radio } from "antd";
+import { Avatar, DatePicker, Image, Input, Modal, Radio, Upload } from "antd";
 import { AppContext } from "../../context/AppProvider";
 import bg_user_default from "../../assets/images/bg_user_default.jfif";
 import AvatarUploader from "react-avatar-uploader";
@@ -46,6 +46,15 @@ export default function UpdateInfoUserModal() {
     const handleCancel = () => {
         setIsUpdateInfoUserModalOpen(false);
     };
+    const handleSetAvartar = async (e) => {
+        // console.log(e);
+        // console.log("alo");
+    };
+    const handlePro = async (e, p) => {
+        console.log(e);
+        console.log(p);
+        console.log("alo");
+    };
 
     const user = {
         displayName: "Kha Vỹ",
@@ -72,11 +81,24 @@ export default function UpdateInfoUserModal() {
                                 user.photoURL ? user.photoURL : bg_user_default
                             }
                         />
-                        {user.photoURL ? (
+                        <AvatarUploader
+                            className="md-info-user-avt"
+                            size={70}
+                            src={
+                                currentUser !== null
+                                    ? currentUser.avatarImage
+                                    : ""
+                            }
+                            onStart={handleSetAvartar}
+                            onFinished={handlePro}
+                            uploadURL={updateUser}
+                        ></AvatarUploader>
+                        {/* {user.photoURL ? (
                             <Avatar
                                 className="md-info-user-avt"
                                 size={70}
                                 src={user.photoURL}
+                                onClick={handleSetAvartar}
                             ></Avatar>
                         ) : (
                             <AvatarUploader
@@ -86,8 +108,9 @@ export default function UpdateInfoUserModal() {
                                 uploadURL="http://localhost:3000"
                                 fileType={"image"}
                                 style={{ width: "500px" }}
+                              
                             />
-                        )}
+                        )} */}
                     </div>
                     <div className="md-u-info-user-form-body">
                         <span style={{ fontSize: "16px", fontWeight: "bold" }}>

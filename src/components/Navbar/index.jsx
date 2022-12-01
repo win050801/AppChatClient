@@ -7,25 +7,35 @@ import { AppContext } from "../../context/AppProvider";
 import SearchList from "../SearchList";
 import PhoneBookList from "../PhoneBookList";
 
-export default function Navbar({ contacts, changeChat }) {
-  const { isSearchInput, isMessageWindow } = React.useContext(AppContext);
+export default function Navbar({ contacts, changeChat, socket }) {
+    const { isSearchInput, isMessageWindow } = React.useContext(AppContext);
 
-  return (
-    <div className="navbar">
-      <Row>
-        <Col span={24}>
-          <Search />
-        </Col>
-        <Col span={24}>
-          {isSearchInput ? (
-            <SearchList contacts={contacts} changeChat={changeChat} />
-          ) : isMessageWindow ? (
-            <ChatList contacts={contacts} changeChat={changeChat} />
-          ) : (
-            <PhoneBookList contacts={contacts} changeChat={changeChat} />
-          )}
-        </Col>
-      </Row>
-    </div>
-  );
+    return (
+        <div className="navbar">
+            <Row>
+                <Col span={24}>
+                    <Search />
+                </Col>
+                <Col span={24}>
+                    {isSearchInput ? (
+                        <SearchList
+                            contacts={contacts}
+                            changeChat={changeChat}
+                        />
+                    ) : isMessageWindow ? (
+                        <ChatList
+                            contacts={contacts}
+                            changeChat={changeChat}
+                            socket={socket}
+                        />
+                    ) : (
+                        <PhoneBookList
+                            contacts={contacts}
+                            changeChat={changeChat}
+                        />
+                    )}
+                </Col>
+            </Row>
+        </div>
+    );
 }

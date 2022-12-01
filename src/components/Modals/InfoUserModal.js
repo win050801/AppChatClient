@@ -52,7 +52,9 @@ export default function InfoUserModal() {
                     <Avatar
                         className="md-info-user-avt"
                         size={70}
-                        src={user.photoURL}
+                        src={
+                            currentUser !== null ? currentUser.avatarImage : ""
+                        }
                     >
                         {user.photoURL
                             ? ""
