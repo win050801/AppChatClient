@@ -91,6 +91,7 @@ export default function AddFriendModal() {
             listCurrentFriendPhone.push(m.phonenumber);
         });
         //Kiểm tra đã gửi lời mời hay chưa
+        console.log(checkSendedRequestAddFriend);
         if (listAllRequestDoNotAgree.indexOf(phoneNumber) !== -1) {
             const checkSended = await axios.post(checkSendedRequestAddFriend, {
                 senderId: currentUser.phonenumber,
@@ -98,6 +99,7 @@ export default function AddFriendModal() {
             });
             setSendedRequst(checkSended.data);
         }
+        console.log("bbbb");
         if (
             listCurrentFriendPhone.indexOf(
                 response.data.data[0].phonenumber

@@ -55,7 +55,7 @@ export default function ChatRoomInfo() {
     const onclickTV = (e) => {
         setclick(e);
     };
-    const handleOpenInfo = () => {};
+    const handleOpenInfo = () => { };
 
     function getItem(label, key, children) {
         return {
@@ -246,15 +246,22 @@ export default function ChatRoomInfo() {
                     "2"
                 ),
                 getItem(
-                    <Button
-                        className="chat-room-info-btn-setting"
-                        type="text"
-                        icon={<CloseSquareOutlined />}
-                        onClick={handleDeleteGroup}
-                    >
-                        Giải tán nhóm
-                    </Button>,
-                    "3"
+                    <>
+                        {roomChat === undefined ? (<></>) : (
+                            <>
+                                {user._id === roomChat.manager ? (<Button
+                                    className="chat-room-info-btn-setting"
+                                    type="text"
+                                    icon={<CloseSquareOutlined />}
+                                    onClick={handleDeleteGroup}
+                                >
+                                    Giải tán nhóm
+                                </Button>
+                                ) : (<></>)}
+                            </>
+                        )}
+
+                    </>
                 ),
             ]
         ),
@@ -355,8 +362,8 @@ export default function ChatRoomInfo() {
                                                     {1 !== 1
                                                         ? ""
                                                         : roomChat.roomName
-                                                              ?.charAt(0)
-                                                              ?.toUpperCase()}
+                                                            ?.charAt(0)
+                                                            ?.toUpperCase()}
                                                 </Avatar>
                                             }
                                         ></Button>
@@ -531,7 +538,7 @@ export default function ChatRoomInfo() {
                                                         style={{ width: 10 }}
                                                     ></span>
                                                     {mem._id ===
-                                                    roomChat.manager ? (
+                                                        roomChat.manager ? (
                                                         <div>
                                                             <span>
                                                                 (Nhóm trưởng){" "}
@@ -548,10 +555,10 @@ export default function ChatRoomInfo() {
                                                     }
                                                 >
                                                     {user._id ===
-                                                    roomChat.manager ? (
+                                                        roomChat.manager ? (
                                                         <div>
                                                             {mem._id !==
-                                                            roomChat.manager ? (
+                                                                roomChat.manager ? (
                                                                 <>
                                                                     <Dropdown
                                                                         trigger={[
