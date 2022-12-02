@@ -8,6 +8,8 @@ import {
     getCurrentFriend,
     getAllCurrentFriend,
     host,
+    getnewMessages,
+    getnewMessagesRoom
 } from "../../utils/APIRoutes";
 
 export default function ChatList({ contacts, changeChat, socket }) {
@@ -37,7 +39,27 @@ export default function ChatList({ contacts, changeChat, socket }) {
             const response = await axios.post(getCurrentFriend, {
                 currentUserId: currentUser._id,
             });
-            setListCurrentFriend(response.data.data2);
+            const data = response.data.data2
+            for (let i = 0; i < data.length; i++) {
+                console.log(user);
+                const respon = await axios.post(getnewMessages, {
+                    from: currentUser._id,
+                    to: data[i]._id
+                });
+                console.log(respon);
+                if (respon.data) {
+                    data[i].newmess = respon.data.message
+                    data[i].createdAt = respon.data.createdAt
+                    data[i].fromSelf = respon.data.fromSelf
+                    // console.log(respon.data);
+                }
+                else {
+                    data[i].createdAt = ""
+                }
+
+            }
+            console.log(data);
+            setListCurrentFriend(data);
 
             if (socket.current) {
                 socket.current.on("list-friend-add-into", async (data) => {
@@ -127,7 +149,7 @@ export default function ChatList({ contacts, changeChat, socket }) {
                                 </div>
                                 <div className="name">
                                     <h3>{contact.username}</h3>
-                                    <p>Hello</p>
+                                    <p>{contact.newmess}</p>
                                 </div>
                             </div>
                         );
@@ -157,8 +179,8 @@ export default function ChatList({ contacts, changeChat, socket }) {
                                                 {room.avatarImage
                                                     ? ""
                                                     : room.roomName
-                                                          ?.charAt(0)
-                                                          ?.toUpperCase()}
+                                                        ?.charAt(0)
+                                                        ?.toUpperCase()}
                                             </Avatar>
                                         </div>
                                         <div className="name">

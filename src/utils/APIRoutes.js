@@ -11,6 +11,8 @@ export const addreaction = `${host}/api/messages/addreaction`;
 export const setAvatarRoute = `${host}/api/auth/setavatar`;
 export const addRoom = `${host}/api/room/addRoom`;
 export const getRoom = `${host}/api/room/getRoom`;
+export const getnewMessages = `${host}/api/messages/getnewMessages`;
+export const getnewMessagesRoom = `${host}/api/messages/getnewMessagesRoom`;
 //Get Message Room Chat
 export const getMessagesRoom = `${host}/api/messages/getMessagesRoom`;
 export const addTT = `${host}/api/room/addTT`;
